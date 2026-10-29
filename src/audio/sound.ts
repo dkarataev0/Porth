@@ -313,7 +313,7 @@ class Sound {
       return { duration: estimate, done, stop: end }
     }
     const synth = window.speechSynthesis
-    synth.cancel()
+    if (synth.speaking || synth.pending) synth.cancel()
     const voice = await this.pickVoice()
     const u = new SpeechSynthesisUtterance(text)
     u.lang = 'ru-RU'
